@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public enum Info {
-    ATTENDANCE("출석"),PERCEPTION("지각"),ABSENCE("결석");
+    ATTENDANCE("출석"),LATENESS("지각"),ABSENCE("결석");
 
     private final String infoName;
 
@@ -21,7 +21,7 @@ public enum Info {
         Duration diff=Duration.between(start, end);
         long diffMin=diff.toMinutes();
         if(diffMin>30) return ABSENCE;
-        if(diffMin>5) return PERCEPTION;
+        if(diffMin>5) return LATENESS;
         return ATTENDANCE;
     }
 

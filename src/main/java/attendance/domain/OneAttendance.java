@@ -7,7 +7,7 @@ import java.time.LocalTime;
 public class OneAttendance {
     private final String nickname;
     private final LocalDate today;
-    private final LocalTime time;
+    private LocalTime time;
     private LocalDateTime attInfo;
     private Info info;
 
@@ -29,5 +29,13 @@ public class OneAttendance {
 
     public Info getInfo(){
         return info;
+    }
+
+    public void changeTime(LocalTime newTime){
+        this.time=newTime;
+        this.attInfo=LocalDateTime.of(this.today, newTime);
+
+        LocalTime standardTime=TimeByDay.from(today.getDayOfWeek().getValue()).getTime();
+        this.info=Info.checkInfo(LocalDateTime.of(today, standardTime), this.attInfo);
     }
 }

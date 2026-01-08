@@ -19,7 +19,7 @@ public class 출석지각결석테스트 {
 
     @Test
     void 지각인지확인테스트(){
-        Assertions.assertThat(Info.PERCEPTION).isEqualTo(Info.checkInfo(fixTime, perTime));
+        Assertions.assertThat(Info.LATENESS).isEqualTo(Info.checkInfo(fixTime, perTime));
     }
 
     @Test
