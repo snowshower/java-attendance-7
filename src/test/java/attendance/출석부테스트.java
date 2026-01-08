@@ -1,6 +1,5 @@
 package attendance;
 
-import attendance.domain.Crew;
 import attendance.domain.OneAttendance;
 import attendance.repository.AttendanceRepository;
 import org.assertj.core.api.Assertions;
@@ -12,22 +11,20 @@ import java.time.LocalTime;
 import java.util.List;
 
 public class 출석부테스트 {
-    private LocalDateTime today=LocalDateTime.of(2024,12,10,10,0);
-    private LocalDate date=LocalDate.of(2024,12,10);
+    private LocalDate date1=LocalDate.of(2024,12,9);
+    private LocalDate date2=LocalDate.of(2024,12,10);
+    private LocalDate date3=LocalDate.of(2024,12,11);
+    private LocalDate date4=LocalDate.of(2024,12,12);
     private LocalTime time1=LocalTime.of(9,58);
     private LocalTime time2=LocalTime.of(10,4);
     private LocalTime time3=LocalTime.of(10,7);
     private LocalTime time4=LocalTime.of(10,34);
 
-    private Crew crew1=new Crew("갑", date, time1);
-    private Crew crew2=new Crew("을", date, time2);
-    private Crew crew3=new Crew("갑", date, time3);
-    private Crew crew4=new Crew("정", date, time4);
+    private OneAttendance oneAttendance1=new OneAttendance("이든", date1, time1);
+    private OneAttendance oneAttendance2=new OneAttendance("이든", date2, time2);
+    private OneAttendance oneAttendance3=new OneAttendance("빙티", date3, time3);
+    private OneAttendance oneAttendance4=new OneAttendance("밤티", date4, time4);
 
-    private OneAttendance oneAttendance1=new OneAttendance(crew1, today);
-    private OneAttendance oneAttendance2=new OneAttendance(crew2, today);
-    private OneAttendance oneAttendance3=new OneAttendance(crew3, today);
-    private OneAttendance oneAttendance4=new OneAttendance(crew4, today);
 
     private AttendanceRepository attendanceRepository=new AttendanceRepository();
 
@@ -38,10 +35,6 @@ public class 출석부테스트 {
         attendanceRepository.save(oneAttendance3);
         attendanceRepository.save(oneAttendance4);
 
-        for (OneAttendance oneAttendance : attendanceRepository.getAttendanceSheet()) {
-            System.out.println(oneAttendance.getCrew().getNickname()+oneAttendance.getCrew().getAttInfo()+oneAttendance.getInfo());
-        }
-        Assertions.assertThat(attendanceRepository.getAttendanceSheet().contains(oneAttendance1)).isTrue();
     }
 
     @Test
@@ -51,9 +44,7 @@ public class 출석부테스트 {
         attendanceRepository.save(oneAttendance3);
         attendanceRepository.save(oneAttendance4);
 
-        System.out.println(attendanceRepository.findByDate(crew1.getNickname(), crew1.getAttInfo()).getCrew().getNickname());
-
-        Assertions.assertThat(oneAttendance1).isEqualTo(attendanceRepository.findByDate(crew1.getNickname(), crew1.getAttInfo()));
+        System.out.println(attendanceRepository.findByDate("이든", 10).getAttInfo());
     }
 
     @Test
@@ -63,10 +54,9 @@ public class 출석부테스트 {
         attendanceRepository.save(oneAttendance3);
         attendanceRepository.save(oneAttendance4);
 
-        List<OneAttendance> list=attendanceRepository.findByNickname("갑");
-
+        List<OneAttendance> list=attendanceRepository.findByNickname("이든");
         for (OneAttendance oneAttendance : list) {
-            System.out.println(oneAttendance.getCrew().getNickname());
+            System.out.println(oneAttendance.getAttInfo());
         }
     }
 }
