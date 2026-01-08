@@ -1,21 +1,27 @@
 package attendance.domain;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class Crew {
     private final String nickname;
-    private final LocalDateTime time;
+    private final LocalDate attDate;
+    private final LocalTime attTime;
+    private final LocalDateTime attInfo;
 
-    public Crew(String nickname, LocalDateTime time){
+    public Crew(String nickname, LocalDate attDate, LocalTime attTime){
         this.nickname=nickname;
-        this.time=time;
+        this.attDate=attDate;
+        this.attTime=attTime;
+        this.attInfo=LocalDateTime.of(attDate, attTime);
     }
 
     public String getNickname(){
         return nickname;
     }
 
-    public LocalDateTime getTime(){
-        return time;
+    public LocalDateTime getAttInfo(){
+        return attInfo;
     }
 }
