@@ -26,9 +26,9 @@ public class InputView {
         return Console.readLine();
     }
 
-    public String inputUpdateDate(){
+    public int inputUpdateDate(){
         System.out.println("수정하려는 날짜(일)를 입력해 주세요.");
-        return Console.readLine();
+        return Integer.parseInt(Console.readLine());
     }
 
     public String inputUpdateTime(){

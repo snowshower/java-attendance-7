@@ -1,5 +1,7 @@
 package attendance.view;
 
+import java.util.List;
+
 public class OutputView {
 
     public void outputFunction(){
@@ -22,8 +24,10 @@ public class OutputView {
     }
 
     //출석기록확인
-    public void outputRecord(){
-        System.out.println();
+    public void outputRecord(List<String> list){
+        for (String s : list) {
+            System.out.println(s);
+        }
     }
 
 }
